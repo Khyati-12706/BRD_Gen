@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Hexagon, ArrowRight, Shield, Command, Loader2 } from 'lucide-react';
 import GlassCard from '../components/GlassCard';
 import { auth } from '../firebase';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const LoginPage = () => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -42,7 +44,7 @@ const LoginPage = () => {
             };
 
             localStorage.setItem('user', JSON.stringify(userData));
-            window.location.href = '/upload';
+            navigate('/upload');  // React Router respects basename — no more 404!
         } catch (error) {
             console.error('Critical Authentication Failure:', error);
             alert(`Authentication failed: ${error.message}`);
