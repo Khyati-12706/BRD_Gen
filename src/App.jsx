@@ -12,8 +12,10 @@ import LoginPage from './pages/LoginPage';
 import AgentsPage from './pages/AgentsPage';
 
 function App() {
+  // basename tells React Router that the app lives at /BRDGen-Report/ on GitHub Pages
+  const basename = import.meta.env.BASE_URL || '/BRDGen-Report/';
   return (
-    <Router>
+    <Router basename={basename}>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/" element={<Layout />}>
