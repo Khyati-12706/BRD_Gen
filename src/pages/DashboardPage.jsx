@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FileText, AlertTriangle, Users, Zap, ArrowRight, TrendingUp, Clock, CheckCircle2, Activity } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const API_BASE = 'http://localhost:8000';
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 const MOCK_METRICS = [
     { label: 'Total Requirements', value: '—', icon: 'FileText' },

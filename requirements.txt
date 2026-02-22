@@ -1,11 +1,16 @@
 fastapi
-uvicorn
+uvicorn[standard]
 pydantic
 python-multipart
 mailparser
 pypdf
+pdfplumber
+python-docx
 rapidfuzz
 openai
 scikit-learn
 networkx
 sentence-transformers
+chromadb
+google-generativeai
+sqlalchemy

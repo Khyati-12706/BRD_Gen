@@ -1,0 +1,29 @@
+services:
+  # ── Backend: FastAPI Python Pipeline ─────────────────────────────────────────
+  - type: web
+    name: brdgen-backend
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false          # You'll paste this in Render dashboard
+      - key: PYTHON_VERSION
+        value: 3.11.0
+
+  # ── Frontend: React / Vite Static Site ───────────────────────────────────────
+  - type: web
+    name: brdgen-frontend
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npx serve dist -l $PORT --single
+    envVars:
+      - key: VITE_API_URL
+        # After backend deploys, paste its URL here, e.g. https://brdgen-backend.onrender.com
+        sync: false
+      - key: VITE_BASE_PATH
+        value: /              # Render frontend lives at root, not a subpath
+      - key: NODE_VERSION
+        value: 20.0.0

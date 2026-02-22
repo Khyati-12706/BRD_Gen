@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { CheckCircle2, Loader2, AlertTriangle, Zap, Database, GitBranch, Brain, Shield, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const API_BASE = 'http://localhost:8000';
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 const PIPELINE_STAGES = [
     { id: 1, name: 'Signal Ingestion', desc: 'Parsing EML / XML / JSON / PDF files', icon: Database, duration: 1200 },
@@ -181,9 +181,9 @@ const ProcessingPage = () => {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: idx * 0.05 }}
                         className={`flex items-center gap-5 p-4 rounded-2xl border transition-all ${stage.status === 'active' ? 'border-accent/40 bg-accent/5 shadow-lg shadow-accent/10' :
-                                stage.status === 'complete' ? 'border-emerald-500/20 bg-emerald-500/5' :
-                                    stage.status === 'error' ? 'border-red-500/30 bg-red-500/5' :
-                                        'border-white/5 bg-white/[0.02]'
+                            stage.status === 'complete' ? 'border-emerald-500/20 bg-emerald-500/5' :
+                                stage.status === 'error' ? 'border-red-500/30 bg-red-500/5' :
+                                    'border-white/5 bg-white/[0.02]'
                             }`}
                     >
                         <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center">
@@ -191,9 +191,9 @@ const ProcessingPage = () => {
                         </div>
                         <div className="flex-1 min-w-0">
                             <p className={`text-sm font-black uppercase tracking-widest ${stage.status === 'active' ? 'text-white' :
-                                    stage.status === 'complete' ? 'text-emerald-400' :
-                                        stage.status === 'error' ? 'text-red-400' :
-                                            'text-slate-600'
+                                stage.status === 'complete' ? 'text-emerald-400' :
+                                    stage.status === 'error' ? 'text-red-400' :
+                                        'text-slate-600'
                                 }`}>
                                 {stage.name}
                             </p>
